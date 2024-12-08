@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         if(!empty($student_id))
         {
-            $unfiltered_property = array_filter($unfiltered_property, fn($data) => $data['student_id'] == $student_id);
+            $unfiltered_property = array_filter($unfiltered_property, fn($data) => $data['student_id'] == $student_id . " ");
         }
 
         if(!empty($quiz_name))
@@ -82,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     
     <br>
 
-    <table class='table table-stripped container shadow'>
+    <table class='table table-striped container shadow'>
         <tr class='table-dark'>
             <th> Subject </th>
             <th> Quiz </th>

@@ -50,7 +50,7 @@ $quiz_record = fetchAll($data);
     <h1 class='text-center'> <b> Quiz Records </b> </h1>
     
 
-    <table class='table table-stripped container'>
+    <table class='table table-striped container'>
         <tr class='table-dark'>
             <th> Subject </th>
             <th> Quiz </th>
