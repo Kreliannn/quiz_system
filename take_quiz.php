@@ -13,6 +13,11 @@ $code = $_POST['quiz_code'];
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body{
+            user-select :none;
+        }
+    </style>
 </head>
 <body>
     <?php include("navbar_student.php")?>
@@ -32,7 +37,25 @@ $code = $_POST['quiz_code'];
         
         $(document).ready(()=>{
 
-        
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState === "hidden") {
+                    alert("Tab is now hidden");
+                } else if (document.visibilityState === "visible") {
+                    alert("you caught cheating");
+                    $.ajax({
+                        url : "backend/record_quiz.php",
+                        method : "post",
+                        data : {
+                            quiz_code : $("#quiz_code").val(),
+                            quiz_score : `<span class="badge bg-danger"> Cheated </span>`,
+                            student_id : $("#student_id").val(),
+                        },
+                        success : (response) => {
+                            window.location.href = "student.record.php"
+                        }
+                    })
+                }
+            });
             
             async function question_answer(question, answer)
             {
@@ -92,7 +115,7 @@ $code = $_POST['quiz_code'];
                             <div class="col"></div>
             
                             <div class="col">
-                            <a href="student.home.php" class='btn btn-primary' style='width:100%; transform: scale(2)'> Home </a>
+                            <a href="student.record.php" class='btn btn-primary' style='width:100%; transform: scale(2)'> Home </a>
                         </div>
                         <div class="col"></div>
                         </div>
